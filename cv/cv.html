@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Waruna Jayasundara - CV</title>
+<!--
+  Source for the downloadable CV. Same layout as the original CV
+  (photo header, light-blue section bars, two A4 pages).
+  Build the PDF with:  npm run cv
+-->
+<style>
+  @page { size: A4; margin: 9mm 14mm 9mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Calibri, Carlito, 'Segoe UI', Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.27;
+    color: #1a1a1a;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  a { color: inherit; text-decoration: none; }
+  .blue { color: #2f5aa8; }
+  .muted { color: #55657e; }
+
+  /* ---------- Header ---------- */
+  header { display: flex; gap: 7mm; align-items: center; padding-bottom: 3.2mm; border-bottom: 1.6pt solid #111; }
+  header img { width: 29mm; height: 36mm; object-fit: cover; object-position: center top; display: block; }
+  h1 { font-size: 25pt; font-weight: 700; letter-spacing: 0.2pt; margin: 0 0 2mm; line-height: 1; }
+  .contacts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: auto auto; column-gap: 9mm; row-gap: 0.9mm; font-size: 10.4pt; }
+  .contacts li { display: flex; align-items: center; gap: 2.2mm; color: #2f5aa8; white-space: nowrap; }
+  .contacts svg { width: 3.3mm; height: 3.3mm; flex: none; fill: #2f5aa8; }
+
+  /* ---------- Sections ---------- */
+  h2 {
+    background: #dce6f3;
+    font-size: 10.6pt; font-weight: 700; letter-spacing: 0.3pt; text-transform: uppercase;
+    margin: 3mm 0 1.5mm; padding: 0.6mm 2mm;
+  }
+  p { margin: 0; }
+  .summary { text-align: justify; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
+  .date { font-size: 9.6pt; color: #55657e; white-space: nowrap; }
+  .title { font-weight: 700; }
+  .sub { font-style: italic; color: #55657e; }
+
+  table.skills { border-collapse: collapse; width: 100%; }
+  table.skills td { padding: 0.35mm 0; vertical-align: top; }
+  table.skills td:first-child { width: 31mm; font-weight: 700; }
+
+  ul.bullets { margin: 0.8mm 0 0; padding-left: 5mm; }
+  ul.bullets li { margin: 0.2mm 0; }
+  .entry { margin-bottom: 1.8mm; }
+  .entry:last-child { margin-bottom: 0; }
+
+  .project { margin-bottom: 1.6mm; }
+  .project .stack { color: #2f5aa8; }
+  .project .link { color: #2f5aa8; font-size: 9.6pt; }
+
+  .cols-2 { display: grid; grid-template-columns: 1fr 1fr; column-gap: 8mm; row-gap: 0.9mm; }
+  .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; column-gap: 6mm; row-gap: 0.9mm; }
+  .lead .row { padding: 0.15mm 0; }
+  .refs { display: grid; grid-template-columns: 1fr 1fr; column-gap: 8mm; }
+  .refs p { line-height: 1.3; }
+  .page-break { break-before: page; }
+  .keep { break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="photo.jpg" alt="Waruna Jayasundara" />
+  <div>
+    <h1>WARUNA JAYASUNDARA</h1>
+    <ul class="contacts">
+      <li><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>+94 71 923 7035 (WhatsApp)</li>
+      <li><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.95a15.6 15.6 0 0 0-1.38-3.56A8 8 0 0 1 18.9 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A8 8 0 0 1 5.08 16zm2.95-8H5.08a8 8 0 0 1 4.33-3.56A15.6 15.6 0 0 0 8.03 8zM12 19.96A14.1 14.1 0 0 1 10.09 16h3.82A14.1 14.1 0 0 1 12 19.96zM14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8 8 0 0 1-4.33 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4z"/></svg><a href="https://warunajayasundara.site">warunajayasundara.site</a></li>
+      <li><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg><a href="mailto:jwarunaravisanka@gmail.com">jwarunaravisanka@gmail.com</a></li>
+      <li><svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.3 18H5.7V9.7h2.6zM7 8.6A1.5 1.5 0 1 1 7 5.6a1.5 1.5 0 0 1 0 3zM18.3 18h-2.6v-4.1c0-1-.02-2.27-1.38-2.27-1.38 0-1.6 1.08-1.6 2.2V18H10.1V9.7h2.5v1.13h.04a2.74 2.74 0 0 1 2.46-1.35c2.63 0 3.12 1.73 3.12 3.98z"/></svg><a href="https://www.linkedin.com/in/waruna-jayasundara-3a80ab265">linkedin.com/in/waruna-jayasundara-3a80ab265</a></li>
+      <li><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Kelaniya, Colombo, Sri Lanka</li>
+      <li><svg viewBox="0 0 24 24"><path d="M8.7 16.6 4.1 12l4.6-4.6L7.3 6l-6 6 6 6zm6.6 0 4.6-4.6-4.6-4.6L16.7 6l6 6-6 6z"/></svg><a href="https://github.com/WarunaJayasundara">github.com/WarunaJayasundara</a></li>
+    </ul>
+  </div>
+</header>
+
+<h2>Professional Summary</h2>
+<p class="summary">
+  Highly motivated Software Engineering undergraduate at the University of Kelaniya with internship experience in
+  full-stack web development, requirement analysis and agile project delivery. Built and deployed two live client
+  systems, a point-of-sale and inventory system and a deed-registration tracker, and an AI-powered adaptive learning
+  platform as my final-year project. Skilled in React, TypeScript, Laravel, PHP, Python, Java, SQL and REST APIs, with a
+  strong foundation in databases, testing, system design and documentation. Proficient in using AI tools such as GitHub
+  Copilot, Cursor, ChatGPT and Claude for coding, debugging and documentation. Recognised for leadership, teamwork, clear
+  communication, adaptability and continuous learning.
+</p>
+
+<h2>Education</h2>
+<div class="row"><span class="title">Bachelor of Information and Communication Technology (Hons)</span><span class="date">Expected 2026</span></div>
+<p class="sub">University of Kelaniya &nbsp;|&nbsp; Specialisation: Software Systems</p>
+
+<h2>Technical Skills</h2>
+<table class="skills">
+  <tr><td>Languages</td><td>Python, PHP, JavaScript, TypeScript, Java, SQL, Dart, C</td></tr>
+  <tr><td>Frontend</td><td>HTML, CSS, React, Next.js, Tailwind CSS, TanStack Query, PWA, JavaFX</td></tr>
+  <tr><td>Backend</td><td>Laravel, Node.js, Express, Flask, FastAPI, REST APIs, Electron</td></tr>
+  <tr><td>Databases</td><td>MySQL / MariaDB, PostgreSQL, SQLite, Oracle (PL/SQL basics)</td></tr>
+  <tr><td>AI &amp; Data</td><td>scikit-learn, XGBoost, SHAP explainability</td></tr>
+  <tr><td>Testing</td><td>PHPUnit, Vitest, browser and end-to-end testing</td></tr>
+  <tr><td>Tools &amp; Cloud</td><td>Git, GitHub, VS Code, Postman, Docker, Vercel, cPanel hosting, Figma, Canva</td></tr>
+  <tr><td>AI Tools</td><td>GitHub Copilot, Cursor AI, ChatGPT, Claude</td></tr>
+  <tr><td>Practices</td><td>Agile/Scrum, Requirement Analysis, Debugging and Testing, Technical Documentation</td></tr>
+</table>
+
+<h2>Experience</h2>
+<div class="entry keep">
+  <div class="row"><span class="title">Software Engineering Intern – Beaver Creation (Pvt) Ltd</span><span class="date">Sep 2025 – Apr 2026</span></div>
+  <ul class="bullets">
+    <li>Contributed to end-to-end software development including feature implementation, debugging, testing, deployment support and responsive solution development.</li>
+    <li>Built the company website with Next.js, TypeScript and Tailwind CSS, now live at beavercreation.com.</li>
+    <li>Participated in requirement gathering and translated business needs into practical technical solutions.</li>
+    <li>Assisted project coordination with task tracking, progress updates, sprint communication and stakeholder follow-ups.</li>
+    <li>Collaborated with developers, designers, QA and stakeholders in structured agile workflows.</li>
+    <li>Used AI tools for code generation, debugging, documentation, reporting and productivity optimisation.</li>
+  </ul>
+</div>
+<div class="entry keep">
+  <div class="row"><span class="title">Freelance Full-Stack Developer – Independent</span><span class="date">2026</span></div>
+  <ul class="bullets">
+    <li>Built and deployed YASH MOBILE POS, a point-of-sale and inventory system for a mobile accessories shop (yashenterpr.store).</li>
+    <li>Built and deployed Nottary-Service, a secure deed-registration tracker for a notarial office (nottary-service.online).</li>
+    <li>Handled the full cycle for each client: requirements, design, development, testing, hosting and support.</li>
+  </ul>
+</div>
+<div class="entry keep">
+  <div class="row"><span class="title">Volunteer – ICC T20 World Cup 2026, Sri Lanka</span><span class="date">2026</span></div>
+  <ul class="bullets">
+    <li>Supported international event coordination and operational workflows in a fast-paced team environment.</li>
+  </ul>
+</div>
+<div class="entry keep">
+  <div class="row"><span class="title">Project Intern (Project Management) – International Youth Alliance for Peace</span><span class="date">2021</span></div>
+  <ul class="bullets">
+    <li>Supported project coordination and digital documentation; contributed to team reporting.</li>
+  </ul>
+</div>
+
+<!-- ================= Page 2 ================= -->
+<h2 class="page-break">Projects</h2>
+
+<div class="project keep">
+  <div class="row"><span><span class="title">HelaIQ – AI-Powered Adaptive Learning &amp; Exam-Readiness Platform</span> <span class="muted">| Final Year Project</span></span><span class="date">2025 – 2026</span></div>
+  <p class="stack">React, TypeScript, Laravel, MySQL, Python (FastAPI, XGBoost)</p>
+  <p>Bilingual (English/Sinhala) web platform that helps Sri Lankan students prepare for government competitive exams through an adaptive placement test, daily weak-area practice, timed mock exams, eight brain-training games and an explainable machine-learning exam-readiness prediction.</p>
+</div>
+
+<div class="project keep">
+  <div class="row"><span><span class="title">YASH MOBILE POS – Point of Sale &amp; Inventory System</span> <span class="muted">| Client project, live</span></span><span class="date">2026</span></div>
+  <p class="stack">Laravel 12, React, TypeScript, MySQL, PWA</p>
+  <p>Billing, stock, purchasing, returns and profit reporting for a phone accessories shop, with an offline sales queue, thermal/A4/PDF invoices, barcode scanning and role-based staff access. <span class="link">yashenterpr.store</span></p>
+</div>
+
+<div class="project keep">
+  <div class="row"><span><span class="title">Nottary-Service – Deed Registration Tracker</span> <span class="muted">| Client project, live</span></span><span class="date">2026</span></div>
+  <p class="stack">PHP, MySQL, Firebase Cloud Messaging, SMS API</p>
+  <p>Secure record of property deeds from submission to Land Registry completion, with role-based access, a full audit trail, staff push notifications and automatic bilingual SMS to buyers and sellers. <span class="link">nottary-service.online</span></p>
+</div>
+
+<div class="project keep">
+  <div class="row"><span><span class="title">ExamDock – Desktop Exam Countdown Widget</span></span><span class="date">2026</span></div>
+  <p class="stack">Electron, React, Node.js, SQLite</p>
+  <p>Offline Windows widget that tracks exam countdowns, sends reminders and imports timetables from CSV, Excel, PDF, Word or a photo (OCR).</p>
+</div>
+
+<div class="project keep">
+  <div class="row"><span><span class="title">Dog Run – Browser Game</span></span><span class="date">2026</span></div>
+  <p class="stack">JavaScript, HTML, CSS</p>
+  <p>Endless-runner game with physics, double jump, collision detection, sound, touch controls and a saved best score. <span class="link">mini-game-rho-gray.vercel.app</span></p>
+</div>
+
+<div class="project keep">
+  <div class="row"><span><span class="title">Other projects</span></span></div>
+  <ul class="bullets">
+    <li><b>Hotel Management System</b> <span class="stack">(React, HTML, CSS)</span> – booking with room availability, authentication and an admin dashboard.</li>
+    <li><b>Library Management System</b> <span class="stack">(Java, JavaFX, MySQL)</span> – desktop app for books and lending with search and authentication.</li>
+    <li><b>Courier Tracking System</b> <span class="stack">(Python, PostgreSQL)</span> – tracking of packages and couriers with stored data management.</li>
+    <li><b>Waste Control System</b> <span class="stack">(HTML, CSS, JavaScript)</span> – user and admin roles to schedule waste pickups and report local issues.</li>
+  </ul>
+</div>
+
+<h2>Certifications</h2>
+<div class="cols-2">
+  <span>Bentley Accredited iTwin Developer: Associate</span><span>AWS Cloud Essentials for Business Leaders</span>
+  <span>Responsive Web Design – freeCodeCamp</span><span>Diploma in ICT – Esoft Metro Campus</span>
+  <span>Diploma in English – Esoft Metro Campus</span>
+</div>
+
+<h2>Core Strengths</h2>
+<div class="cols-3">
+  <span>Critical Thinking</span><span>Problem Solving</span><span>Team Collaboration</span>
+  <span>Leadership</span><span>Adaptability</span><span>Time Management</span>
+  <span>Fast Learning</span><span>Stakeholder Coordination</span><span>AI Tool Utilisation</span>
+</div>
+
+<h2>Leadership &amp; Activities</h2>
+<div class="lead">
+  <div class="row"><span><b>Vice President</b>, Information Technology Students' Association – University of Kelaniya</span><span class="date">2022 – 2023</span></div>
+  <div class="row"><span><b>Committee Member</b>, ITSA – University of Kelaniya</span><span class="date">2021 – 2022</span></div>
+  <div class="row"><span><b>Batch Representative</b>, 3rd Year – University of Kelaniya</span><span class="date">2024 – 2025</span></div>
+  <div class="row"><span><b>University Colours Awardee</b>, University of Kelaniya</span><span class="date">2024</span></div>
+  <div class="row"><span><b>Taekwondo Team Member</b>, University of Kelaniya</span><span class="date">2023 – 2026</span></div>
+  <div class="row"><span><b>Senior Prefect</b>, Central College, Anuradhapura</span><span class="date">2016 – 2018</span></div>
+  <div class="row"><span><b>Silver Medallist</b>, All Island Open Karate Tournament</span><span class="date">2011</span></div>
+</div>
+
+<h2>References</h2>
+<div class="refs keep">
+  <p><b>Dr. S. P. Kasthuri Arachchi</b><br />Senior Lecturer, Head of the Department<br />Department of Software Engineering<br />University of Kelaniya<br />sandelik@kln.ac.lk &nbsp;|&nbsp; +94 74 293 5784</p>
+  <p><b>Dr. N. Mekhala Hakmanage</b><br />Senior Lecturer<br />Department of Computer Systems Engineering<br />University of Kelaniya<br />navodim@kln.ac.lk &nbsp;|&nbsp; +94 70 577 7658</p>
+</div>
+
+</body>
+</html>

@@ -15,8 +15,13 @@ export default function CaseStudy({ project }: { project: Project }) {
 
   useEffect(() => {
     document.title = `${project.name} - case study · Waruna Jayasundara`;
+    // Point the canonical link at this case study while it is open.
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel=canonical]');
+    const home = canonical?.href;
+    if (canonical && home) canonical.href = new URL(`work/${project.slug}`, home).href;
     return () => {
       document.title = 'Waruna Jayasundara - Software Engineer';
+      if (canonical && home) canonical.href = home;
     };
   }, [project]);
 

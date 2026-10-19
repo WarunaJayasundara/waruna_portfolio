@@ -1,6 +1,6 @@
 # Waruna Jayasundara - Portfolio
 
-**Live:** https://warunajayasundara.github.io/waruna_portfolio/ (GitHub Pages, deployed automatically on every push to `main`)
+**Live:** https://warunajayasundara.site (Vercel, redeploys on every push to `main`). Mirror: https://warunajayasundara.github.io/waruna_portfolio/
 
 Personal portfolio site. A static React app with no backend, so it can be hosted free on Vercel, Netlify or GitHub Pages.
 
@@ -27,6 +27,7 @@ Open http://localhost:5173.
 | `npm run preview` | Serve the production build on http://localhost:4173 |
 | `npm run typecheck` | TypeScript only |
 | `npm run images` | Regenerate optimised WebP images from `assets-src/` |
+| `npm run cv` | Rebuild `public/Waruna_Jayasundara_CV.pdf` from `cv/cv.html` (needs Chrome or Edge) |
 
 ## Editing content
 
@@ -38,7 +39,7 @@ You can change all of the text without touching any layout code:
 | `src/data/projects.ts` | Selected projects, case studies (`caseStudy`), the archive list |
 | `src/data/experience.ts` | Roles, leadership, certifications |
 | `src/data/skills.ts` | Technology groups and where each one is used |
-| `public/Waruna_Jayasundara_CV.pdf` | The downloadable résumé. Replace the file but keep the same name. |
+| `cv/cv.html` | The CV. Edit it, then run `npm run cv` to update the downloadable PDF (two A4 pages). |
 
 **Adding a project:** append an object to `projects`. If you give it a `caseStudy`, it gets a page at `/work/<slug>` automatically.
 
