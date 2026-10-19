@@ -1,8 +1,8 @@
-# Waruna Jayasundara — Portfolio
+# Waruna Jayasundara - Portfolio
 
 Personal portfolio site. A static React app with no backend, so it can be hosted free on Vercel, Netlify or GitHub Pages.
 
-**Stack:** React 18, TypeScript, Vite 6, Tailwind CSS 4, Lucide icons. There is no animation library: the motion is CSS plus one IntersectionObserver, and it turns off under `prefers-reduced-motion`.
+**Stack:** React 18, TypeScript, Vite 6, Tailwind CSS 4, Lucide icons and Lenis (smooth scrolling). The particle effects are hand-written canvas code. All motion switches off under `prefers-reduced-motion`.
 
 ## Run it locally
 
@@ -32,7 +32,7 @@ You can change all of the text without touching any layout code:
 
 | File | Contents |
 |---|---|
-| `src/data/profile.ts` | Name, email, phone, links, education, availability line |
+| `src/data/profile.ts` | Name, email, phone, WhatsApp number, links, education, availability line |
 | `src/data/projects.ts` | Selected projects, case studies (`caseStudy`), the archive list |
 | `src/data/experience.ts` | Roles, leadership, certifications |
 | `src/data/skills.ts` | Technology groups and where each one is used |
@@ -43,6 +43,10 @@ You can change all of the text without touching any layout code:
 **Images:** put the raw files in `assets-src/`, add them to `scripts/optimize-images.mjs`, run `npm run images`, then set `image.base` on the project.
 
 Design tokens (colours, fonts, easing) are all in `src/index.css` under `@theme`.
+
+**Services and WhatsApp:** the offers are in `src/sections/Services.tsx`. Every WhatsApp button uses `whatsappLink()` from `src/data/profile.ts`, so changing `whatsappNumber` updates them all.
+
+**Logo:** the WJ mark is defined once in `src/components/Logo.tsx` (also used by the particle logo). The favicon and app icons are in `public/` and use the same paths.
 
 ## Deploying
 
@@ -75,7 +79,7 @@ Set `VITE_SITE_URL` to the live URL with no trailing slash (for example `https:/
 
 ## Quality checks (last run 19 Oct 2026, local production build)
 
-- `npm run build`: passes with no TypeScript errors. JS is about 71 kB gzipped; case studies load as a separate 2 kB chunk.
-- Lighthouse 12.2.1 on the home page, mobile: Performance 98, Accessibility 100, Best Practices 100, SEO 100.
-- Lighthouse 12.2.1 on the home page and `/work/helaiq`, desktop: 100 in all four categories.
-- No horizontal overflow at 375 px on the home page or the case studies. The keyboard skip link, focus rings and the Escape key on the mobile menu all work.
+- `npm run build` passes with no TypeScript errors. JS is about 83 kB gzipped; case studies load as a separate 2 kB chunk.
+- Lighthouse 12.2.1, desktop, on the home page and `/work/helaiq`: 100 in Performance, Accessibility, Best Practices and SEO.
+- Lighthouse 12.2.1, mobile (simulated slow phone), home page: Accessibility 100, Best Practices 100, SEO 100. Performance was 81-88 across three runs; the animated particle canvases cost about 0.4 s of main-thread time on that simulated device.
+- Tested in real Chrome: wheel scrolling, nav links, `/#section` deep links, case-study navigation, no horizontal overflow at 390 px, no console errors. With reduced motion, smooth scrolling and animations are off and all content is visible.

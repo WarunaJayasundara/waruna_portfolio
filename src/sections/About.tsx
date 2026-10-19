@@ -4,7 +4,7 @@ import { SectionHeader } from '../components/ui';
 export function About() {
   return (
     <section id="about" aria-labelledby="about-title" className="container-x py-24 sm:py-32">
-      <SectionHeader index="04" label="About" title={<span id="about-title">An early-career engineer <span className="text-mute">with real systems to show.</span></span>} />
+      <SectionHeader index="05" label="About" title={<span id="about-title">An early-career engineer <span className="text-mute">with real systems to show.</span></span>} />
 
       <div className="mt-16 grid gap-12 lg:grid-cols-12">
         <div className="space-y-6 text-lg leading-relaxed text-pretty lg:col-span-7" data-reveal>

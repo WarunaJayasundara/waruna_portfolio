@@ -1,3 +1,4 @@
+import { scrollToTarget } from './motion';
 import { createContext, forwardRef, useCallback, useContext, useEffect, useState, type AnchorHTMLAttributes, type MouseEvent, type ReactNode } from 'react';
 
 // A deliberately tiny History-API router: the site has two kinds of page
@@ -13,10 +14,10 @@ const toAppPath = (pathname: string) => {
 
 export const href = (path: string) => (path.startsWith('/') ? `${BASE}${path}` : path);
 
-function scrollToHash(hash: string | undefined, topIfMissing = true) {
+function scrollToHash(hash: string | undefined, topIfMissing = true, immediate = false) {
   const el = hash ? document.getElementById(hash) : null;
-  if (el) el.scrollIntoView();
-  else if (topIfMissing) window.scrollTo({ top: 0 });
+  if (el) scrollToTarget(el, immediate);
+  else if (topIfMissing) scrollToTarget(0, true);
 }
 
 type RouterValue = { path: string; navigate: (to: string) => void };
@@ -28,7 +29,8 @@ export function RouterProvider({ children }: { children: ReactNode }) {
   // Honour a hash in the initial URL once the page has rendered (e.g. /#contact).
   useEffect(() => {
     const hash = window.location.hash.slice(1);
-    if (hash) requestAnimationFrame(() => scrollToHash(hash, false));
+    // Wait for layout (fonts, images with fixed sizes) before jumping there.
+    if (hash) setTimeout(() => scrollToHash(hash, false, true), 120);
   }, []);
 
   useEffect(() => {

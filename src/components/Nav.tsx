@@ -2,10 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { Download, Menu, X } from 'lucide-react';
 import { Link, useRouter, href } from '../lib/router';
 import { observeSections } from '../lib/useReveal';
-import { profile } from '../data/profile';
+import { profile, whatsappLink } from '../data/profile';
+import { WhatsappIcon } from './icons';
+import { LogoLockup } from './Logo';
 
 const items = [
   { id: 'work', label: 'Work' },
+  { id: 'services', label: 'Services' },
   { id: 'about', label: 'About' },
   { id: 'expertise', label: 'Expertise' },
   { id: 'experience', label: 'Experience' },
@@ -61,8 +64,7 @@ export function Nav() {
       <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${open ? 'border-b border-line bg-ink' : scrolled ? 'border-b border-line bg-ink/85 backdrop-blur-md' : 'border-b border-transparent'}`}>
         <nav className="container-x flex h-16 items-center justify-between" aria-label="Primary">
           <Link to="/" className="group flex items-center gap-3" aria-label={`${profile.name}, home`}>
-            <Wordmark />
-            <span className="hidden text-sm font-medium tracking-tight sm:inline">{profile.name}</span>
+            <LogoLockup compact />
           </Link>
 
           <ul className="hidden items-center gap-1 lg:flex">
@@ -84,7 +86,7 @@ export function Nav() {
             <a
               href={href(`/${profile.resume}`)}
               download
-              className="hidden items-center gap-2 rounded-[4px] border border-line-2 px-3.5 py-2 text-sm font-medium transition-colors hover:border-signal hover:text-signal sm:inline-flex"
+              className="hidden items-center gap-2 rounded-full border border-line-2 px-3.5 py-2 text-sm font-medium transition-colors hover:border-signal hover:text-signal sm:inline-flex"
             >
               <Download aria-hidden="true" className="size-4" /> Résumé
             </a>
@@ -120,23 +122,17 @@ export function Nav() {
                 </li>
               ))}
             </ul>
-            <a href={href(`/${profile.resume}`)} download className="mt-8 inline-flex items-center gap-2 rounded-[4px] bg-signal px-5 py-3 font-medium text-ink">
-              <Download aria-hidden="true" className="size-4" /> Download résumé (PDF)
-            </a>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href={href(`/${profile.resume}`)} download className="inline-flex items-center gap-2 rounded-full bg-signal px-5 py-3 font-medium text-ink">
+                <Download aria-hidden="true" className="size-4" /> Download CV (PDF)
+              </a>
+              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#25d366] px-5 py-3 font-medium text-[#062b14]">
+                <WhatsappIcon className="size-4" /> WhatsApp
+              </a>
+            </div>
           </div>
         )}
       </header>
     </>
-  );
-}
-
-/** "WJ" monogram: a W drawn as strokes and a J hook in the accent colour. */
-export function Wordmark({ className = 'size-8' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
-      <rect x="0.5" y="0.5" width="63" height="63" rx="10" fill="none" stroke="var(--color-line-2)" />
-      <path d="M12 18l6 28 6-20 6 20 6-28" fill="none" stroke="var(--color-paper)" strokeWidth="4.5" strokeLinecap="square" />
-      <path d="M46 18v20a8 8 0 0 1-8 8" fill="none" stroke="var(--color-signal)" strokeWidth="4.5" strokeLinecap="square" className="origin-center transition-transform duration-500 group-hover:-translate-y-0.5" />
-    </svg>
   );
 }

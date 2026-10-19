@@ -1,94 +1,110 @@
-import { useState } from 'react';
-import { ArrowUpRight, Check, Copy, Download, Mail, Phone } from 'lucide-react';
-import { profile } from '../data/profile';
+import { useState, type ReactNode } from 'react';
+import { ArrowUpRight, Check, Copy, Download, Mail, MapPin, Phone } from 'lucide-react';
+import { profile, whatsappLink } from '../data/profile';
 import { href } from '../lib/router';
-import { GithubIcon, LinkedinIcon } from '../components/icons';
+import { GithubIcon, LinkedinIcon, WhatsappIcon } from '../components/icons';
+import { ParticleField } from '../components/ParticleField';
+
+function CopyButton({ value, label }: { value: string; label: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      type="button"
+      onClick={async () => {
+        try {
+          await navigator.clipboard.writeText(value);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        } catch {
+          /* Clipboard unavailable: the link itself still works. */
+        }
+      }}
+      className="relative z-10 inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-line-2 text-mute transition-colors hover:border-paper hover:text-paper"
+    >
+      {copied ? <Check aria-hidden="true" className="size-4 text-signal" /> : <Copy aria-hidden="true" className="size-4" />}
+      <span className="sr-only">{copied ? `${label} copied` : `Copy ${label}`}</span>
+    </button>
+  );
+}
+
+function DetailCard({ icon, label, value, href: url, external, copy, className = '' }: { icon: ReactNode; label: string; value: string; href: string; external?: boolean; copy?: string; className?: string }) {
+  return (
+    <li className={`${className} group relative flex min-w-0 items-center gap-4 rounded-2xl border border-line bg-ink-2/80 p-5 backdrop-blur transition-colors hover:border-line-2`}>
+      <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-ink-3 text-paper transition-colors group-hover:text-signal">{icon}</span>
+      <span className="min-w-0 flex-1">
+        <span className="label block">{label}</span>
+        <a
+          href={url}
+          {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          className="mt-1 block text-[1.02rem] font-medium [overflow-wrap:anywhere] after:absolute after:inset-0 after:content-['']"
+        >
+          {value}
+        </a>
+      </span>
+      {copy ? <CopyButton value={copy} label={label.toLowerCase()} /> : <ArrowUpRight aria-hidden="true" className="size-4 text-faint transition-colors group-hover:text-signal" />}
+    </li>
+  );
+}
 
 export function Contact() {
-  const [copied, setCopied] = useState(false);
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(profile.email);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      /* Clipboard unavailable: the mailto link still works. */
-    }
-  };
-
-  const channels = [
-    { label: 'GitHub', value: `@${profile.githubHandle}`, href: profile.github, Icon: GithubIcon },
-    { label: 'LinkedIn', value: 'Waruna Jayasundara', href: profile.linkedin, Icon: LinkedinIcon },
-  ];
-
   return (
     <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden border-t border-line py-24 sm:py-32">
-      <div aria-hidden="true" className="blueprint absolute inset-0 [mask-image:radial-gradient(ellipse_60%_70%_at_70%_60%,black,transparent)]" />
+      <div aria-hidden="true" className="absolute inset-0 opacity-70 [mask-image:radial-gradient(ellipse_70%_80%_at_50%_40%,black,transparent)]">
+        <ParticleField />
+      </div>
       <div className="container-x relative">
-        <p className="label" data-reveal><span className="text-signal">06</span> — Contact</p>
+        <p className="label" data-reveal><span className="text-signal">07</span> - Contact</p>
         <h2 id="contact-title" className="mt-8 max-w-5xl text-[clamp(2.6rem,7.5vw,6.2rem)] leading-[0.92] font-semibold tracking-[-0.05em] text-balance" data-reveal>
-          Have a system that needs to be <em className="font-serif font-normal text-signal italic">right?</em>
+          Let’s build something <em className="font-serif font-normal text-signal italic">great</em> together.
         </h2>
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-mute" data-reveal>
-          I’m looking for software engineering roles where I can keep building careful, well-tested products. The
-          fastest way to reach me is email.
+          Hiring for a software role, or need a website or system for your business? Message me on WhatsApp for the
+          quickest reply, or use any of the details below.
         </p>
 
-        <div className="mt-12 flex flex-col gap-3 sm:flex-row sm:items-center" data-reveal>
+        <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-12" data-reveal>
+          {/* Primary action: WhatsApp */}
           <a
-            href={`mailto:${profile.email}`}
-            className="group inline-flex min-w-0 items-center gap-3 rounded-[4px] bg-signal px-5 py-4 text-ink transition-[filter] hover:brightness-110"
+            href={whatsappLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex min-w-0 flex-col justify-between overflow-hidden rounded-3xl bg-signal p-7 text-ink sm:p-9 lg:col-span-5"
           >
-            <Mail aria-hidden="true" className="size-5 shrink-0" />
-            <span className="truncate text-base font-medium sm:text-lg">{profile.email}</span>
-            <ArrowUpRight aria-hidden="true" className="size-4 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            <span aria-hidden="true" className="absolute -right-10 -bottom-10 size-48 rounded-full bg-white/30 blur-3xl transition-transform duration-700 group-hover:scale-125" />
+            <span className="relative flex items-center justify-between">
+              <span className="inline-flex items-center gap-2 rounded-full bg-ink/10 px-3 py-1.5 font-mono text-[0.7rem] tracking-widest uppercase">
+                <span className="size-1.5 rounded-full bg-ink" /> Fastest reply
+              </span>
+              <ArrowUpRight aria-hidden="true" className="size-6 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </span>
+            <span className="relative mt-16 block">
+              <WhatsappIcon className="size-10" />
+              <span className="mt-4 block text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">Chat on WhatsApp</span>
+              <span className="mt-2 block font-mono text-sm opacity-75">{profile.phone}</span>
+            </span>
+            <span className="sr-only">(opens WhatsApp)</span>
           </a>
-          <button
-            type="button"
-            onClick={copy}
-            className="inline-flex items-center justify-center gap-2 rounded-[4px] border border-line-2 px-4 py-4 text-sm transition-colors hover:border-paper"
-          >
-            {copied ? <Check aria-hidden="true" className="size-4 text-signal" /> : <Copy aria-hidden="true" className="size-4" />}
-            {copied ? 'Copied' : 'Copy email'}
-          </button>
-          <span className="sr-only" aria-live="polite">{copied ? 'Email address copied to clipboard' : ''}</span>
-        </div>
 
-        <ul className="mt-16 grid border-t border-line sm:grid-cols-2 lg:grid-cols-4" data-reveal>
-          {channels.map(({ label, value, href: url, Icon }) => (
-            <li key={label} className="border-b border-line lg:border-r lg:last:border-r-0">
-              <a href={url} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between gap-4 py-6 pr-4 transition-colors hover:text-signal lg:px-5 lg:first:pl-0">
-                <span className="flex items-center gap-3">
-                  <Icon className="size-5 text-mute group-hover:text-signal" />
-                  <span>
-                    <span className="label block">{label}</span>
-                    <span className="mt-1 block">{value}</span>
-                  </span>
-                </span>
-                <ArrowUpRight aria-hidden="true" className="size-4 text-faint" />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-            </li>
-          ))}
-          <li className="border-b border-line lg:border-r lg:px-5">
-            <a href={profile.phoneHref} className="group flex items-center gap-3 py-6 transition-colors hover:text-signal">
-              <Phone aria-hidden="true" className="size-5 text-mute group-hover:text-signal" />
-              <span>
-                <span className="label block">Phone</span>
-                <span className="mt-1 block">{profile.phone}</span>
+          {/* All contact details, clearly listed */}
+          <ul className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:col-span-7">
+            <DetailCard className="sm:col-span-2" icon={<Mail aria-hidden="true" className="size-5" />} label="Email" value={profile.email} href={`mailto:${profile.email}`} copy={profile.email} />
+            <DetailCard icon={<Phone aria-hidden="true" className="size-5" />} label="Phone" value={profile.phone} href={profile.phoneHref} copy={profile.phone} />
+            <DetailCard icon={<LinkedinIcon className="size-5" />} label="LinkedIn" value="Waruna Jayasundara" href={profile.linkedin} external />
+            <DetailCard icon={<GithubIcon className="size-5" />} label="GitHub" value={`@${profile.githubHandle}`} href={profile.github} external />
+            <DetailCard icon={<MapPin aria-hidden="true" className="size-5" />} label="Based in" value={profile.location} href="https://maps.google.com/?q=Kelaniya,Sri+Lanka" external />
+            <li className="group relative flex items-center gap-4 rounded-2xl border border-signal/40 bg-signal-dim p-5">
+              <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-signal text-ink">
+                <Download aria-hidden="true" className="size-5" />
               </span>
-            </a>
-          </li>
-          <li className="border-b border-line lg:px-5">
-            <a href={href(`/${profile.resume}`)} download className="group flex items-center gap-3 py-6 transition-colors hover:text-signal">
-              <Download aria-hidden="true" className="size-5 text-mute group-hover:text-signal" />
-              <span>
+              <span className="min-w-0 flex-1">
                 <span className="label block">Résumé</span>
-                <span className="mt-1 block">Download PDF</span>
+                <a href={href(`/${profile.resume}`)} download className="mt-1 block font-medium after:absolute after:inset-0 after:content-['']">
+                  Download CV (PDF)
+                </a>
               </span>
-            </a>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
   );

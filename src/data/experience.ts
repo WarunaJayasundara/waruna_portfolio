@@ -12,7 +12,7 @@ export const roles: Role[] = [
   {
     title: 'Software Engineering Intern',
     org: 'Beaver Creation (Pvt) Ltd',
-    period: 'Sep 2025 — Apr 2026',
+    period: 'Sep 2025 - Apr 2026',
     points: [
       'Worked across the delivery cycle: feature implementation, debugging, testing and deployment support.',
       'Took part in requirement gathering and turned business needs into concrete technical tasks.',
@@ -38,12 +38,12 @@ export const roles: Role[] = [
 ];
 
 export const leadership: { title: string; org: string; period: string }[] = [
-  { title: 'Vice President', org: "IT Students' Association, University of Kelaniya", period: '2022 — 2023' },
-  { title: 'Committee Member', org: "IT Students' Association, University of Kelaniya", period: '2021 — 2022' },
-  { title: 'Batch Representative, 3rd Year', org: 'University of Kelaniya', period: '2024 — 2025' },
+  { title: 'Vice President', org: "IT Students' Association, University of Kelaniya", period: '2022 - 2023' },
+  { title: 'Committee Member', org: "IT Students' Association, University of Kelaniya", period: '2021 - 2022' },
+  { title: 'Batch Representative, 3rd Year', org: 'University of Kelaniya', period: '2024 - 2025' },
   { title: 'University Colours Awardee', org: 'University of Kelaniya', period: '2024' },
-  { title: 'Taekwondo Team Member', org: 'University of Kelaniya', period: '2023 — 2026' },
-  { title: 'Senior Prefect', org: 'Central College, Anuradhapura', period: '2016 — 2018' },
+  { title: 'Taekwondo Team Member', org: 'University of Kelaniya', period: '2023 - 2026' },
+  { title: 'Senior Prefect', org: 'Central College, Anuradhapura', period: '2016 - 2018' },
   { title: 'Silver Medallist', org: 'All Island Open Karate Tournament', period: '2011' },
 ];
 

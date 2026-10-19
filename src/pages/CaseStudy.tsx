@@ -14,9 +14,9 @@ export default function CaseStudy({ project }: { project: Project }) {
   useReveal(project.slug);
 
   useEffect(() => {
-    document.title = `${project.name} — case study · Waruna Jayasundara`;
+    document.title = `${project.name} - case study · Waruna Jayasundara`;
     return () => {
-      document.title = 'Waruna Jayasundara — Software Engineer';
+      document.title = 'Waruna Jayasundara - Software Engineer';
     };
   }, [project]);
 

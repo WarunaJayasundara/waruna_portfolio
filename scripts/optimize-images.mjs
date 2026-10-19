@@ -22,7 +22,7 @@ for (const w of [480, 800]) {
 }
 
 // Project screenshots (1440×900 captures): 16:10 frames at two widths.
-const shots = ['helaiq', 'yash', 'nithi', 'beaver', 'helaiq-admin'];
+const shots = ['helaiq', 'yash', 'nithi', 'beaver'];
 for (const name of shots) {
   for (const w of [720, 1280]) {
     await sharp(`${SRC}/${name}.png`)
@@ -50,11 +50,11 @@ const og = Buffer.from(`
   <rect width="1200" height="630" fill="#0c0d0f"/>
   <rect width="1200" height="630" fill="url(#g)"/>
   <text x="64" y="96" font-family="Consolas, monospace" font-size="20" fill="#c8f04a" letter-spacing="3">SOFTWARE ENGINEER · SRI LANKA</text>
-  <text x="64" y="250" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="92" fill="#efebe3" letter-spacing="-3">Waruna</text>
-  <text x="64" y="350" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="92" fill="#efebe3" letter-spacing="-3">Jayasundara</text>
-  <text x="64" y="440" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#a8a49c">Full-stack systems that hold up under real use —</text>
-  <text x="64" y="480" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#a8a49c">adaptive testing, point of sale, legal records.</text>
-  <rect x="64" y="540" width="56" height="4" fill="#c8f04a"/>
+  <text x="64" y="230" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="92" fill="#efebe3" letter-spacing="-3">Waruna</text>
+  <text x="64" y="330" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="92" fill="#efebe3" letter-spacing="-3">Jayasundara</text>
+  <text x="64" y="410" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#a8a49c">Web systems, business websites and portfolios,</text>
+  <text x="64" y="450" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#a8a49c">built to be relied on.</text>
+  <g transform="translate(64 520) scale(1.25)"><rect width="64" height="64" rx="14" fill="#121417" stroke="#34383f"/><path d="M9 18 L16.5 40 L24 24 L31.5 40 L39 18" fill="none" stroke="#efebe3" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><path d="M49 18 V39 a8.5 8.5 0 0 1 -8.5 8.5 H33" fill="none" stroke="#c8f04a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/></g>
 </svg>`);
 const ogPortrait = await sharp(`${SRC}/portrait.jpg`)
   .extract({ left: 0, top: cropTop, width: pw, height: cropH })

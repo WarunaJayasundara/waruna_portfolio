@@ -4,10 +4,11 @@ export const profile = {
   shortName: 'Waruna',
   role: 'Software Engineer',
   location: 'Kelaniya, Sri Lanka',
-  availability: 'Open to software engineering roles',
+  availability: 'Open to roles and freelance projects',
   email: 'jwarunaravisanka@gmail.com',
   phone: '+94 71 923 7035',
   phoneHref: 'tel:+94719237035',
+  whatsappNumber: '94719237035',
   github: 'https://github.com/WarunaJayasundara',
   githubHandle: 'WarunaJayasundara',
   linkedin: 'https://www.linkedin.com/in/waruna-jayasundara-3a80ab265',
@@ -19,3 +20,7 @@ export const profile = {
     year: 'Expected 2026',
   },
 } as const;
+
+/** WhatsApp click-to-chat link with an optional pre-filled message. */
+export const whatsappLink = (message = 'Hi Waruna, I saw your portfolio and would like to talk.') =>
+  `https://wa.me/${profile.whatsappNumber}?text=${encodeURIComponent(message)}`;

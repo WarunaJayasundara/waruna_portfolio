@@ -5,7 +5,7 @@ export function Expertise() {
   return (
     <section id="expertise" aria-labelledby="expertise-title" className="container-x py-24 sm:py-32">
       <SectionHeader
-        index="03"
+        index="04"
         label="Technical expertise"
         title={<span id="expertise-title">Tools I have shipped with, <span className="text-mute">and where you can see them.</span></span>}
         intro="No percentage bars. Where a technology appears in a public project, the project is named next to it."

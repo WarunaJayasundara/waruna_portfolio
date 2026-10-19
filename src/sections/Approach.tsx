@@ -39,7 +39,7 @@ export function Approach() {
     <section id="approach" aria-labelledby="approach-title" className="relative border-y border-line bg-ink-2/40 py-24 sm:py-32">
       <div className="container-x">
         <SectionHeader
-          index="02"
+          index="03"
           label="Approach"
           title={<span id="approach-title">How I work, <span className="text-mute">shown through decisions I have already made.</span></span>}
         />

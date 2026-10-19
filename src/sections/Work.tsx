@@ -55,8 +55,8 @@ function Links({ project }: { project: Project }) {
           <Link
             key={l.href}
             to={l.href}
-            aria-label={`Read the ${project.name} case study`}
-            className="group inline-flex items-center gap-2 rounded-[4px] border border-signal/60 px-4 py-2.5 text-sm font-medium text-signal transition-colors hover:bg-signal hover:text-ink"
+            aria-label={`Read the case study: ${project.name}`}
+            className="group inline-flex items-center gap-2 rounded-full border border-signal/60 px-4 py-2.5 text-sm font-medium text-signal transition-colors hover:bg-signal hover:text-ink"
           >
             Read the case study
             <ArrowRight aria-hidden="true" className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -113,7 +113,7 @@ function Flagship({ project }: { project: Project }) {
               alt="HelaIQ feature cards: 5-level adaptive IQ engine, built for exam day, progress tracking, games, explained answers, Sinhala and English."
               className="block w-full"
             />
-            <figcaption className="border-t border-line px-3 py-2 font-mono text-[0.68rem] text-faint">Fig. — feature overview, landing page</figcaption>
+            <figcaption className="border-t border-line px-3 py-2 font-mono text-[0.68rem] text-faint">Fig. - feature overview, landing page</figcaption>
           </figure>
         </div>
       )}

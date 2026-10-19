@@ -131,6 +131,40 @@
   animation-delay: var(--d, 0ms);
 }
 
+/* Hero name: each line slides up from behind a mask. */
+.mask-line { display: block; overflow: hidden; padding-bottom: 0.16em; margin-bottom: -0.16em; }
+@keyframes rise-in { from { transform: translateY(105%); } to { transform: none; } }
+.hero-rise { display: block; animation: rise-in 1.1s var(--ease-out-quart) both; animation-delay: var(--d, 0ms); }
+
+/* Infinite technology marquee (pauses on hover). */
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee { animation: marquee 40s linear infinite; }
+.marquee:hover { animation-play-state: paused; }
+
+/* Trailing cursor ring (desktop, fine pointers only). */
+.cursor-ring span {
+  display: block;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1px solid rgb(200 240 74 / 0.6);
+  border-radius: 999px;
+  transition: width 0.35s var(--ease-out-quart), height 0.35s var(--ease-out-quart), margin 0.35s var(--ease-out-quart), background-color 0.35s;
+}
+.cursor-ring[data-hot='1'] span {
+  width: 58px;
+  height: 58px;
+  margin: -29px 0 0 -29px;
+  background: rgb(200 240 74 / 0.08);
+}
+
+/* Screenshots ease in to full size as they scroll into view. */
+[data-scroll-zoom] {
+  transform: scale(calc(0.94 + var(--p, 1) * 0.06));
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
 @keyframes pulse-dot {
   0%, 100% { box-shadow: 0 0 0 0 rgb(200 240 74 / 0.5); }
   50% { box-shadow: 0 0 0 6px rgb(200 240 74 / 0); }
@@ -145,4 +179,6 @@
     transition-duration: 0.01ms !important;
   }
   .js-motion [data-reveal] { opacity: 1; transform: none; }
+  .marquee { animation: none; }
+  [data-scroll-zoom] { transform: none; }
 }

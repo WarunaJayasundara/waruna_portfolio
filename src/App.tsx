@@ -5,6 +5,9 @@ import { getProject } from './data/projects';
 import { Nav } from './components/Nav';
 import { Footer } from './components/Footer';
 import { Hero } from './sections/Hero';
+import { Liftoff } from './sections/Liftoff';
+import { Services } from './sections/Services';
+import { FloatingWhatsapp, CursorRing } from './components/FloatingActions';
 import { Work } from './sections/Work';
 import { Approach } from './sections/Approach';
 import { Expertise } from './sections/Expertise';
@@ -30,7 +33,9 @@ export default function App() {
         {isHome ? (
           <>
             <Hero />
+            <Liftoff />
             <Work />
+            <Services />
             <Approach />
             <Expertise />
             <About />
@@ -46,6 +51,8 @@ export default function App() {
         )}
       </main>
       <Footer />
+      <FloatingWhatsapp />
+      <CursorRing />
     </>
   );
 }

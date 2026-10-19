@@ -5,7 +5,7 @@ export function Experience() {
   return (
     <section id="experience" aria-labelledby="experience-title" className="border-t border-line bg-ink-2/40 py-24 sm:py-32">
       <div className="container-x">
-        <SectionHeader index="05" label="Experience" title={<span id="experience-title">Work, leadership <span className="text-mute">and credentials.</span></span>} />
+        <SectionHeader index="06" label="Experience" title={<span id="experience-title">Work, leadership <span className="text-mute">and credentials.</span></span>} />
 
         <ol className="mt-16">
           {roles.map((r, i) => (
@@ -13,7 +13,7 @@ export function Experience() {
               <p className="font-mono text-sm text-faint md:col-span-3">{r.period}</p>
               <div className="md:col-span-9">
                 <h3 className="text-2xl font-semibold tracking-[-0.025em]">
-                  {r.title} <span className="text-mute">— {r.org}</span>
+                  {r.title} <span className="text-mute">- {r.org}</span>
                 </h3>
                 <ul className={`mt-4 space-y-2 ${i === 0 ? '' : 'text-mute'}`}>
                   {r.points.map((p) => (

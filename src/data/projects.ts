@@ -46,7 +46,7 @@ export const projects: Project[] = [
     name: 'HelaIQ',
     tagline: 'Adaptive cognitive training and exam-readiness platform',
     context: 'Final-year project · University of Kelaniya',
-    year: '2025 — 2026',
+    year: '2025 - 2026',
     summary:
       'A bilingual (English / Sinhala) platform that helps Sri Lankan candidates prepare for competitive government exams with an adaptive placement test, weak-area practice, eight cognitive games and an explainable machine-learning readiness prediction.',
     problem:
@@ -115,13 +115,13 @@ export const projects: Project[] = [
             {
               type: 'code',
               caption: 'Three services, one trust boundary',
-              code: `Browser — React 19 SPA (Vite, Tailwind 4, TanStack Query, i18next)
+              code: `Browser - React 19 SPA (Vite, Tailwind 4, TanStack Query, i18next)
    │  same-origin /api requests, Sanctum cookie session + CSRF
    ▼
 Laravel 9 API
    │  thin controllers → domain services
    │  Irt/ · Ml/ · Sessions/ · Study/ · Gamification/ · QuestionBank/
-   ├──────────────► MySQL — 25 tables, 46 migrations
+   ├──────────────► MySQL - 25 tables, 46 migrations
    └──────────────► FastAPI ML service (server-to-server only)
                      /predict · /duplicate-check · /evaluation-report`,
             },
@@ -141,7 +141,7 @@ Laravel 9 API
           id: 'adaptive',
           heading: 'The adaptive testing engine',
           blocks: [
-            { type: 'p', text: 'The first version placed students with fixed accuracy bands (0–39% → Level 1). That assumes every question is equally difficult and has no statistical basis, so I rebuilt placement around the one-parameter Rasch model and turned it into a true computerised-adaptive test.' },
+            { type: 'p', text: 'The first version placed students with fixed accuracy bands (0-39% → Level 1). That assumes every question is equally difficult and has no statistical basis, so I rebuilt placement around the one-parameter Rasch model and turned it into a true computerised-adaptive test.' },
             {
               type: 'code',
               caption: 'Probability of a correct answer, and the Newton-Raphson ability update',
@@ -464,7 +464,7 @@ MySQL / MariaDB ── stock_movements ledger, document_sequences, audit log`,
     name: 'Beaver Creation website',
     tagline: 'Company website built during my internship',
     context: 'Internship · Beaver Creation (Pvt) Ltd',
-    year: '2025 — 2026',
+    year: '2025 - 2026',
     summary:
       'Marketing website for a creative technology studio working across music, gaming, animation and tech. Built with Next.js 15, React 19, TypeScript, Tailwind CSS and Framer Motion.',
     problem: 'The studio needed a fast, responsive site presenting four divisions and a portfolio, with a consistent visual identity.',
