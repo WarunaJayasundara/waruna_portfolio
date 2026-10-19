@@ -1,5 +1,7 @@
 # Waruna Jayasundara - Portfolio
 
+**Live:** https://warunajayasundara.github.io/waruna_portfolio/ (GitHub Pages, deployed automatically on every push to `main`)
+
 Personal portfolio site. A static React app with no backend, so it can be hosted free on Vercel, Netlify or GitHub Pages.
 
 **Stack:** React 18, TypeScript, Vite 6, Tailwind CSS 4, Lucide icons and Lenis (smooth scrolling). The particle effects are hand-written canvas code. All motion switches off under `prefers-reduced-motion`.
