@@ -141,23 +141,6 @@
 .marquee { animation: marquee 40s linear infinite; }
 .marquee:hover { animation-play-state: paused; }
 
-/* Trailing cursor ring (desktop, fine pointers only). */
-.cursor-ring span {
-  display: block;
-  width: 34px;
-  height: 34px;
-  margin: -17px 0 0 -17px;
-  border: 1px solid rgb(200 240 74 / 0.6);
-  border-radius: 999px;
-  transition: width 0.35s var(--ease-out-quart), height 0.35s var(--ease-out-quart), margin 0.35s var(--ease-out-quart), background-color 0.35s;
-}
-.cursor-ring[data-hot='1'] span {
-  width: 58px;
-  height: 58px;
-  margin: -29px 0 0 -29px;
-  background: rgb(200 240 74 / 0.08);
-}
-
 /* Screenshots ease in to full size as they scroll into view. */
 [data-scroll-zoom] {
   transform: scale(calc(0.94 + var(--p, 1) * 0.06));

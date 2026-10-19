@@ -7,7 +7,7 @@ import { Footer } from './components/Footer';
 import { Hero } from './sections/Hero';
 import { Liftoff } from './sections/Liftoff';
 import { Services } from './sections/Services';
-import { FloatingWhatsapp, CursorRing } from './components/FloatingActions';
+import { FloatingWhatsapp } from './components/FloatingActions';
 import { Work } from './sections/Work';
 import { Approach } from './sections/Approach';
 import { Expertise } from './sections/Expertise';
@@ -52,7 +52,6 @@ export default function App() {
       </main>
       <Footer />
       <FloatingWhatsapp />
-      <CursorRing />
     </>
   );
 }
