@@ -2,11 +2,13 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { projects, archive, type Project } from '../data/projects';
 import { Link } from '../lib/router';
 import { ExternalLink, Screenshot, SectionHeader, Tag } from '../components/ui';
+import { PlayableGame } from '../components/PlayableGame';
 
 export function Work() {
   const [flagship, ...rest] = projects;
   const split = rest.filter((p) => p.caseStudy);
-  const compact = rest.filter((p) => !p.caseStudy);
+  const compact = rest.filter((p) => !p.caseStudy && !p.play);
+  const games = rest.filter((p) => p.play);
 
   return (
     <section id="work" aria-labelledby="work-title" className="container-x py-24 sm:py-32">
@@ -29,6 +31,10 @@ export function Work() {
           <Compact key={p.slug} project={p} />
         ))}
       </div>
+
+      {games.map((p) => (
+        <PlayableGame key={p.slug} project={p} />
+      ))}
 
       <Archive />
     </section>

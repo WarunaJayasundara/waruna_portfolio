@@ -32,6 +32,17 @@ for (const name of shots) {
   }
 }
 
+// Dog Run captures (1440×900 with letterboxing): crop to the 1440×648 game stage.
+for (const [src, name] of [['dogrun-play', 'dogrun'], ['dogrun-start', 'dogrun-start']]) {
+  for (const w of [720, 1280]) {
+    await sharp(`${SRC}/${src}.png`)
+      .extract({ left: 0, top: 126, width: 1440, height: 648 })
+      .resize({ width: w })
+      .webp({ quality: 80 })
+      .toFile(`${OUT}/${name}-${w}.webp`);
+  }
+}
+
 // HelaIQ long landing capture → a cropped "feature grid" detail.
 await sharp(`${SRC}/helaiq-tall.png`)
   .extract({ left: 250, top: 1230, width: 940, height: 600 })

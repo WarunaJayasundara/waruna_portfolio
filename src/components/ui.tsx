@@ -40,7 +40,7 @@ export function ExternalLink({ href, children, className = '' }: { href: string;
 }
 
 /** Responsive WebP screenshot inside a minimal browser frame. */
-export function Screenshot({ base, alt, url, priority = false, className = '' }: { base: string; alt: string; url: string; priority?: boolean; className?: string }) {
+export function Screenshot({ base, alt, url, priority = false, className = '', aspect = '16/10' }: { base: string; alt: string; url: string; priority?: boolean; className?: string; aspect?: string }) {
   const src = `${import.meta.env.BASE_URL}images/${base}`;
   return (
     <figure data-scroll data-scroll-zoom className={`overflow-hidden rounded-xl border border-line-2 bg-ink-2 shadow-[0_30px_80px_-30px_rgb(0_0_0/0.8)] ${className}`}>
@@ -61,7 +61,8 @@ export function Screenshot({ base, alt, url, priority = false, className = '' }:
         alt={alt}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
-        className="block aspect-[16/10] w-full object-cover object-top"
+        className="block w-full object-cover object-top"
+        style={{ aspectRatio: aspect }}
       />
     </figure>
   );

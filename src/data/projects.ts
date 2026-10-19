@@ -32,7 +32,9 @@ export type Project = {
   stack: string[];
   facts: { value: string; label: string }[];
   links: ProjectLink[];
-  image?: { base: string; alt: string; browserUrl: string };
+  image?: { base: string; alt: string; browserUrl: string; aspect?: string };
+  /** A live page that can be played inside the portfolio (loaded on click). */
+  play?: { url: string; aspect: string };
   caseStudy?: { intro: string; sections: CaseSection[] };
 };
 
@@ -503,6 +505,41 @@ MySQL / MariaDB ── stock_movements ledger, document_sequences, audit log`,
     stack: ['Electron', 'React 18', 'Node.js', 'SQLite', 'Tesseract OCR'],
     facts: [],
     links: [{ label: 'Source on GitHub', href: gh('exam-counter'), kind: 'repo' }],
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
+    slug: 'dog-run',
+    index: '06',
+    name: 'Dog Run',
+    tagline: 'A browser runner game you can play right here',
+    context: 'Personal project · playable',
+    year: '2026',
+    summary:
+      'An endless-runner game in plain JavaScript: jump, double-jump and slide past 20 bombs as the speed rises. Works with a keyboard or on-screen touch buttons, and saves your best score.',
+    problem: 'Build a complete, polished game with no framework or engine: physics, animation, collisions, sound and controls, all hand-written.',
+    whyInteresting:
+      'The game world is a fixed 1920×864 stage scaled to fit any screen, so the dog, bombs and floor line up the same way on a phone or a desktop.',
+    built: [
+      'Frame-rate independent physics: gravity, jump, double jump and fast fall use a delta time capped at 50 ms',
+      'Hitboxes tighter than the sprites, so collisions feel fair',
+      'Flying bombs from the fifth bomb onward, with spawn gaps that grow with speed so every jump stays possible',
+      'Sprite animation, sound with mute, pause, best score in localStorage and touch controls for phones',
+    ],
+    decisions: [],
+    stack: ['JavaScript', 'HTML', 'CSS', 'Vercel'],
+    facts: [],
+    links: [
+      { label: 'Play full screen', href: 'https://mini-game-rho-gray.vercel.app/', kind: 'live' },
+      { label: 'Source on GitHub', href: gh('Mini-Game'), kind: 'repo' },
+    ],
+    image: {
+      base: 'dogrun',
+      alt: 'Dog Run gameplay: a cartoon dog jumps over a bomb in a torch-lit castle corridor, with score, bombs passed and best score shown at the top.',
+      browserUrl: 'mini-game-rho-gray.vercel.app',
+      aspect: '20/9',
+    },
+    play: { url: 'https://mini-game-rho-gray.vercel.app/', aspect: '20/9' },
   },
 ];
 
