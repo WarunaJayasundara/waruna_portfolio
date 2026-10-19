@@ -9,7 +9,7 @@ const services = [
     Icon: LayoutDashboard,
     title: 'Business web systems',
     body: 'Point-of-sale, inventory, booking, records and management systems with secure logins, roles, admin dashboards and reports.',
-    proof: 'Like YASH MOBILE POS and Nottary-Service',
+    proof: 'Example: YASH MOBILE POS',
     points: ['Staff accounts and permissions', 'Reports, invoices and exports', 'Works on phone and desktop'],
     message: 'Hi Waruna, I need a web system for my business. Can we talk?',
   },
@@ -17,7 +17,7 @@ const services = [
     Icon: Megaphone,
     title: 'Business & advertising websites',
     body: 'Fast, modern websites and landing pages that present your business, promote your products and bring customers to call or message you.',
-    proof: 'Like the Beaver Creation website',
+    proof: 'Example: Beaver Creation',
     points: ['Mobile-first, quick to load', 'WhatsApp, call and map buttons', 'Search-engine friendly setup'],
     message: 'Hi Waruna, I would like a website to advertise my business. Can we talk?',
   },
@@ -25,7 +25,7 @@ const services = [
     Icon: UserRound,
     title: 'Portfolio websites',
     body: 'Personal portfolio sites for professionals and students that show your work clearly and make it easy for employers and clients to contact you.',
-    proof: 'Like this website',
+    proof: 'Example: this website',
     points: ['Your own design and logo', 'CV download and contact links', 'Hosting and domain setup'],
     message: 'Hi Waruna, I would like a portfolio website. Can we talk?',
   },
@@ -62,8 +62,11 @@ export function Services() {
               <span className="inline-flex size-12 items-center justify-center rounded-xl border border-line-2 bg-ink text-signal">
                 <Icon aria-hidden="true" className="size-5" />
               </span>
-              <h3 className="mt-6 text-2xl font-semibold tracking-[-0.03em]">{title}</h3>
-              <p className="mt-3 leading-relaxed text-mute">{body}</p>
+              {/* Top grows to fill the card, so the divider, list and button line up across all three cards. */}
+              <div className="flex-1">
+                <h3 className="mt-6 text-2xl font-semibold tracking-[-0.03em]">{title}</h3>
+                <p className="mt-3 leading-relaxed text-mute">{body}</p>
+              </div>
               <ul className="mt-6 space-y-2.5 border-t border-line pt-5 text-sm">
                 {points.map((p) => (
                   <li key={p} className="flex items-center gap-3">
@@ -72,13 +75,12 @@ export function Services() {
                   </li>
                 ))}
               </ul>
-              <p className="label mt-6">{proof}</p>
+              <p className="label mt-6 truncate">{proof}</p>
               <a
                 href={whatsappLink(message)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-auto inline-flex items-center justify-between gap-2 rounded-xl border border-line-2 px-4 py-3 text-sm font-medium transition-colors group-hover:border-signal group-hover:bg-signal group-hover:text-ink"
-                style={{ marginTop: '1.75rem' }}
+                className="mt-5 inline-flex items-center justify-between gap-2 rounded-xl border border-line-2 px-4 py-3 text-sm font-medium transition-colors group-hover:border-signal group-hover:bg-signal group-hover:text-ink"
               >
                 <span className="inline-flex items-center gap-2"><WhatsappIcon className="size-4" /> Ask about this</span>
                 <ArrowUpRight aria-hidden="true" className="size-4" />

@@ -168,6 +168,37 @@ function BlockView({ block }: { block: Block }) {
           </div>
         </figure>
       );
+    case 'steps':
+      return (
+        <ol className="grid gap-3 sm:grid-cols-2">
+          {block.items.map((s, i) => (
+            <li key={s.title} className="rounded-2xl border border-line bg-ink-2 p-5">
+              <span className="inline-flex size-8 items-center justify-center rounded-full bg-signal font-mono text-xs font-medium text-ink">{i + 1}</span>
+              <p className="mt-4 text-lg font-semibold tracking-tight">{s.title}</p>
+              <p className="mt-1.5 leading-relaxed text-mute">{s.text}</p>
+            </li>
+          ))}
+        </ol>
+      );
+    case 'flow':
+      return (
+        <ol className="flex flex-col gap-2">
+          {block.items.map((s, i) => (
+            <li key={s.title}>
+              <div className="flex items-center gap-4 rounded-2xl border border-line bg-ink-2 p-4 sm:p-5">
+                <span className="font-mono text-xs text-signal">{String(i + 1).padStart(2, '0')}</span>
+                <span>
+                  <span className="block font-semibold">{s.title}</span>
+                  <span className="block text-sm text-mute">{s.text}</span>
+                </span>
+              </div>
+              {i < block.items.length - 1 && (
+                <span aria-hidden="true" className="mx-auto my-1 block h-4 w-px bg-signal/50" />
+              )}
+            </li>
+          ))}
+        </ol>
+      );
     case 'callout':
       return (
         <aside className="rounded-md border border-signal/30 bg-signal-dim p-5">

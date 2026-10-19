@@ -13,7 +13,9 @@ export type Block =
   | { type: 'list'; items: string[] }
   | { type: 'code'; caption?: string; code: string }
   | { type: 'table'; caption?: string; head: string[]; rows: string[][] }
-  | { type: 'callout'; title: string; text: string };
+  | { type: 'callout'; title: string; text: string }
+  | { type: 'steps'; items: { title: string; text: string }[] }
+  | { type: 'flow'; items: { title: string; text: string }[] };
 
 export type CaseSection = { id: string; heading: string; blocks: Block[] };
 
@@ -29,6 +31,8 @@ export type Project = {
   whyInteresting: string;
   built: string[];
   decisions: { title: string; body: string }[];
+  /** Plain-language steps describing how the system works (used for HelaIQ). */
+  howItWorks?: { title: string; body: string }[];
   stack: string[];
   facts: { value: string; label: string }[];
   links: ProjectLink[];
@@ -50,40 +54,19 @@ export const projects: Project[] = [
     context: 'Final-year project · University of Kelaniya',
     year: '2025 - 2026',
     summary:
-      'A bilingual (English / Sinhala) platform that helps Sri Lankan candidates prepare for competitive government exams with an adaptive placement test, weak-area practice, eight cognitive games and an explainable machine-learning readiness prediction.',
-    problem:
-      'Candidates for SLAS, Development Officer, Grama Niladhari, banking and similar exams prepare with static question books that give a raw percentage and no sense of real ability, weak areas or readiness, and very little of it is available in Sinhala.',
-    whyInteresting:
-      'A fair score needs a measurement model, not a percentage. That turned the project into applied psychometrics: item difficulties calibrated from real responses, an adaptive test that stops when the estimate is precise enough, and a prediction model that has to explain itself.',
-    built: [
-      'Rasch (IRT) computerised-adaptive placement test with Newton-Raphson ability estimation and a precision-based stopping rule',
-      'Laravel 9 API (99 routes) organised into domain services: IRT, ML, sessions, study plans, gamification, question bank',
-      'React 19 + TypeScript SPA with full English / Sinhala interface',
-      'Python FastAPI service serving an XGBoost readiness model with SHAP-based explanations',
-      'Deterministic question generators and server-rendered SVG visual questions, 6,700+ active items',
-      'Admin tools: psychometrics dashboard, ML research dashboard, AI-draft review queue',
+      'A bilingual (English / Sinhala) web platform that helps Sri Lankan students prepare for government competitive exams. It finds each student’s level, gives daily practice on their weak areas, trains the mind with games and predicts how ready they are for the exam.',
+    problem: '',
+    whyInteresting: '',
+    built: [],
+    howItWorks: [
+      { title: 'Placement test', body: 'A short adaptive test finds the student’s starting level across memory, logic, numbers, attention and patterns. Each question adjusts to the previous answer.' },
+      { title: 'Daily practice', body: 'Every day the student gets a practice session that focuses more on their weakest areas, plus timed mock exams that feel like the real thing.' },
+      { title: 'Brain games', body: 'Eight short cognitive games train memory, attention, reasoning and mental maths between practice sessions.' },
+      { title: 'Readiness & study plan', body: 'A machine-learning model predicts exam readiness and explains why, and a study plan shows what to practise next until exam day.' },
     ],
-    decisions: [
-      {
-        title: 'Rasch over 2PL / 3PL',
-        body: 'Needs far less response data per item to calibrate stably, which matters for a bank that is still growing. Discrimination is tracked separately as a diagnostic instead.',
-      },
-      {
-        title: 'The browser never calls the ML service',
-        body: 'The model trusts whatever features it is given. Laravel builds the 43-value feature vector from the student’s own database rows, so the only way to raise a score is to practise.',
-      },
-      {
-        title: 'Every external dependency has a working mock',
-        body: 'AI feedback, question drafting and coaching sit behind interfaces with a zero-config fallback, so the whole platform runs with no API keys and switches to Gemini with one .env change.',
-      },
-    ],
-    stack: ['Laravel 9', 'PHP 8', 'React 19', 'TypeScript', 'Tailwind 4', 'TanStack Query', 'MySQL', 'Python', 'FastAPI', 'XGBoost', 'SHAP', 'i18next'],
-    facts: [
-      { value: '6,700+', label: 'active questions' },
-      { value: '100 / 100', label: 'backend tests passing' },
-      { value: 'r = 0.991', label: 'IRT item-recovery, simulated' },
-      { value: '0.906', label: 'readiness ROC-AUC' },
-    ],
+    decisions: [],
+    stack: ['React', 'TypeScript', 'Tailwind CSS', 'Laravel', 'MySQL', 'Python', 'FastAPI', 'Machine learning'],
+    facts: [],
     links: [
       { label: 'Case study', href: '/work/helaiq', kind: 'case' },
       { label: 'Source on GitHub', href: gh('Final-Year-Project'), kind: 'repo' },
@@ -91,142 +74,62 @@ export const projects: Project[] = [
     image: { base: 'helaiq', alt: 'HelaIQ landing page: "Train smarter. Think faster. Prepare with purpose." beside an exam-readiness card showing level and practice streak.', browserUrl: 'helaiq · landing' },
     caseStudy: {
       intro:
-        'HelaIQ is my final-year project (CT/2020/074), supervised by Dr. N. Mekhala Hakmanage. I designed and built all three services (the React client, the Laravel API and the Python ML service) and documented every number below in the project’s thesis reference, where each figure is either taken from a recorded run or re-queried against the live development system.',
+        'HelaIQ is my final-year project at the University of Kelaniya. It is a complete web system for students preparing for Sri Lankan government exams, available in English and Sinhala, on phones and computers.',
       sections: [
         {
-          id: 'context',
-          heading: 'Context and objectives',
+          id: 'what',
+          heading: 'What the system does',
           blocks: [
-            { type: 'p', text: 'Sri Lankan public-sector entrance exams test reasoning, numerical ability, memory and attention. Students prepare with past papers that report a raw percentage, which treats every question as equally hard and says nothing about readiness.' },
-            { type: 'p', text: 'The objectives were to give each student a measured starting point, practice that targets weaknesses, a readiness signal that explains itself, and all of it in both English and Sinhala.' },
+            { type: 'p', text: 'Students sign in with Google or an email, take a placement test, and then get a personal dashboard with daily practice, mock exams, brain games, study notes and an exam countdown.' },
+            { type: 'p', text: 'Administrators manage the question bank, review new questions before they go live, and see how students are progressing.' },
+          ],
+        },
+        {
+          id: 'how',
+          heading: 'How it works',
+          blocks: [
             {
-              type: 'table',
-              caption: 'Who uses the platform',
-              head: ['Role', 'What they do'],
-              rows: [
-                ['Student', 'Adaptive placement test, daily weak-area practice, timed mock exams, 8 cognitive games, study notes with spaced repetition, exam profile with countdown, readiness prediction'],
-                ['Admin', 'Question bank (manual, generated, AI-drafted with review), IRT calibration, psychometrics and ML research dashboards, reference-document library, feedback review'],
+              type: 'steps',
+              items: [
+                { title: 'Placement test', text: 'Questions adapt to each answer to find the student’s level quickly.' },
+                { title: 'Daily practice', text: 'Sessions focus on weak areas; mock exams have a real countdown timer.' },
+                { title: 'Brain games', text: 'Eight games for memory, attention, reasoning and mental maths.' },
+                { title: 'Readiness & plan', text: 'An ML model predicts exam readiness, explains the reasons and guides the study plan.' },
               ],
             },
           ],
         },
         {
           id: 'architecture',
-          heading: 'Architecture and data flow',
+          heading: 'How the parts connect',
           blocks: [
             {
-              type: 'code',
-              caption: 'Three services, one trust boundary',
-              code: `Browser - React 19 SPA (Vite, Tailwind 4, TanStack Query, i18next)
-   │  same-origin /api requests, Sanctum cookie session + CSRF
-   ▼
-Laravel 9 API
-   │  thin controllers → domain services
-   │  Irt/ · Ml/ · Sessions/ · Study/ · Gamification/ · QuestionBank/
-   ├──────────────► MySQL - 25 tables, 46 migrations
-   └──────────────► FastAPI ML service (server-to-server only)
-                     /predict · /duplicate-check · /evaluation-report`,
-            },
-            { type: 'p', text: 'A readiness prediction is a good example of the flow. The client posts to /api/readiness/predict. FeatureExtractionService builds 43 features from the student’s real sessions, answers, game scores and check-ins. The ML service returns a class, a percentage and the top SHAP reasons, and Laravel stores it as a new row. Prediction history is append-only, so trends can be plotted and audited.' },
-            {
-              type: 'list',
+              type: 'flow',
               items: [
-                'Retire, never delete: obsolete questions are marked inactive because answer history holds foreign keys to them.',
-                'History tables (predictions, XP ledger) are append-only.',
-                'Demo and real data are separated by flags, and every research query filters demo rows out by default.',
-                'The same ordered 43-feature list is implemented in PHP and Python and checked to match exactly.',
+                { title: 'React web app', text: 'What students and admins use, in English or Sinhala' },
+                { title: 'Laravel API', text: 'Accounts, tests, practice, games and study plans' },
+                { title: 'MySQL database', text: 'Questions, answers, progress and results' },
+                { title: 'Python ML service', text: 'Predicts readiness from the student’s real practice data' },
               ],
             },
           ],
         },
         {
-          id: 'adaptive',
-          heading: 'The adaptive testing engine',
-          blocks: [
-            { type: 'p', text: 'The first version placed students with fixed accuracy bands (0-39% → Level 1). That assumes every question is equally difficult and has no statistical basis, so I rebuilt placement around the one-parameter Rasch model and turned it into a true computerised-adaptive test.' },
-            {
-              type: 'code',
-              caption: 'Probability of a correct answer, and the Newton-Raphson ability update',
-              code: `P(θ) = 1 / (1 + e^-(θ − b))
-
-θ(k+1) = θk + Σ(uᵢ − Pᵢ(θk)) / Σ Pᵢ(θk)(1 − Pᵢ(θk))
-
-SE(θ) = 1 / √I(θ)`,
-            },
-            {
-              type: 'list',
-              items: [
-                'Item difficulties are calibrated from real responses with PROX, a closed-form method that cannot fail to converge on sparse data. Items with fewer than 5 responses fall back to a prior from their authored level.',
-                'Next item = the unseen item whose difficulty is closest to the current θ, rotated across 5 cognitive categories for content balance.',
-                'The test stops at 25 items, or earlier once at least 15 items are answered and SE(θ) ≤ 0.35, so a lucky streak cannot produce a “finished” but meaningless result.',
-                'IQ = 100 + 15θ, clamped to [40, 160]; level cut-points at θ = −2, −1, 1, 2 line up exactly with the standard IQ bands.',
-              ],
-            },
-          ],
-        },
-        {
-          id: 'ml',
-          heading: 'Exam-readiness prediction',
-          blocks: [
-            { type: 'p', text: 'No public dataset records whether a Sri Lankan exam candidate passed, so the model learns from a hybrid set of 73,637 rows: 45.7% real (Open University Learning Analytics Dataset and UCI Student Performance) and the rest synthetic, with the generator’s weights calibrated by logistic regression against real outcomes. A hard 40% floor stops future changes from diluting the real data.' },
-            {
-              type: 'table',
-              caption: 'Model selection: nine families screened with 5-fold CV, top three tuned with Optuna under nested CV',
-              head: ['Model', 'Optimised test macro-F1'],
-              rows: [
-                ['XGBoost (selected)', '0.6808'],
-                ['CatBoost', '0.6800'],
-                ['LightGBM', '0.6799'],
-              ],
-            },
-            { type: 'p', text: 'On held-out data the selected model reaches macro-F1 0.681 and ROC-AUC 0.906. The evaluation pipeline flags overfitting (train score above CV score), and that warning is shown on the admin dashboard rather than hidden.' },
-            {
-              type: 'callout',
-              title: 'What I deliberately did not predict',
-              text: '“Recommended study hours” and “best learning strategy” were in the original brief. No dataset holds valid ground truth for either, and choosing a strategy needs causal data. They are delivered as rule-based recommendations and labelled that way.',
-            },
-            { type: 'p', text: 'Every prediction comes with its top five SHAP reasons and a plain-English sentence comparing it with the student’s previous prediction. Demographic fields from the real data were analysed offline for fairness and kept out of the feature vector entirely.' },
-          ],
-        },
-        {
-          id: 'content',
-          heading: 'Content at scale, without hand-checking answers',
-          blocks: [
-            { type: 'p', text: 'Most of the bank comes from deterministic PHP generators that follow a “generate forward, solve backward” pattern: pick parameters, compute the answer with a real solver, then write the question and distractors around it. Blood-relation puzzles walk a constructed family graph; seating puzzles are brute-forced to prove a unique solution before they are accepted.' },
-            { type: 'p', text: 'Visual questions (matrices, rotation, mirror, paper folding, cube nets) are rendered as SVG on the server. Rotation items check that no rotation of the mirrored shape equals the original, so a “mirrored” distractor can never accidentally be correct.' },
-            { type: 'p', text: 'AI-drafted questions go through a mandatory draft → admin review → publish pipeline with two independent duplicate checks (Jaccard overlap and TF-IDF cosine).' },
-          ],
-        },
-        {
-          id: 'bilingual',
-          heading: 'Getting Sinhala right',
-          blocks: [
-            { type: 'p', text: 'Sinhala script is easy to corrupt silently: a stray code point from a neighbouring Unicode block looks almost right. I wrote a validator that builds a corpus of verified words from all seeders and locale files (1,398 words across 33 files) and rejects forbidden code points or unreviewed new words.' },
-            { type: 'p', text: 'A structural check compares English and Sinhala question pairs for matching numbers, option counts and answer keys, and is documented as a structural heuristic, not as semantic understanding.' },
-          ],
-        },
-        {
-          id: 'testing',
-          heading: 'Testing and validation',
+          id: 'features',
+          heading: 'Main features',
           blocks: [
             {
               type: 'list',
               items: [
-                '100 / 100 backend tests passing (php artisan test), run against a realistic database with exact per-test cleanup.',
-                'Monte Carlo parameter recovery: 500 simulated students, 60 items, 15,013 responses. Item difficulty r = 0.991, ability r = 0.915.',
-                '131 generated questions re-solved independently from their stored text, with 0 mismatches.',
-                '12 / 12 unauthenticated requests to protected endpoints correctly refused with 401 / 403.',
-                'TypeScript type-check clean, plus end-to-end browser checks of the landing page, admin flows, language switching and the 375 px layout.',
+                'Full English and Sinhala interface',
+                'Adaptive placement test with an IQ-style score and level',
+                'Daily practice, category practice and timed mock exams',
+                'Eight cognitive training games with badges, XP and a leaderboard',
+                'Exam profile with a countdown and a study plan',
+                'Explained answers and study notes with spaced repetition',
+                'Admin panel for questions, users and progress reports',
               ],
             },
-          ],
-        },
-        {
-          id: 'lessons',
-          heading: 'Status and lessons',
-          blocks: [
-            { type: 'p', text: 'HelaIQ runs as three services in a development environment and has been tested by users through a tunnel. It has not yet been deployed to a public production host, and pre-test / post-test results will be reported once the real cohort is large enough.' },
-            { type: 'p', text: 'The ablation study is the result I learned most from. Nine response-time features I expected to help made the model slightly worse (macro-F1 0.6764 against 0.6845 for the live 43-feature model), so the live model was not changed. Reporting that negative result honestly was more useful than shipping a feature that looked impressive.' },
           ],
         },
       ],

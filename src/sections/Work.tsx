@@ -124,43 +124,23 @@ function Flagship({ project }: { project: Project }) {
         </div>
       )}
 
-      <div className="mt-16 grid gap-10 lg:mt-28 lg:grid-cols-12" data-reveal>
-        <div className="space-y-8 lg:col-span-4">
-          <div>
-            <h4 className="label">The problem</h4>
-            <p className="mt-3 leading-relaxed text-pretty">{project.problem}</p>
-          </div>
-          <div>
-            <h4 className="label">Why it was interesting</h4>
-            <p className="mt-3 leading-relaxed text-mute text-pretty">{project.whyInteresting}</p>
-          </div>
-        </div>
-        <div className="lg:col-span-4">
-          <h4 className="label">What I built</h4>
-          <ul className="mt-3 space-y-3">
-            {project.built.map((b) => (
-              <li key={b} className="flex gap-3 leading-relaxed text-mute">
-                <span aria-hidden="true" className="mt-[0.7em] h-px w-3 shrink-0 bg-signal" />
-                <span>{b}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="lg:col-span-4">
-          <h4 className="label">Decisions that mattered</h4>
-          <ol className="mt-3 space-y-5">
-            {project.decisions.map((d, i) => (
-              <li key={d.title} className="border-l border-line-2 pl-4">
-                <p className="font-medium"><span className="mr-2 font-mono text-xs text-signal">{String(i + 1).padStart(2, '0')}</span>{d.title}</p>
-                <p className="mt-1.5 text-sm leading-relaxed text-mute">{d.body}</p>
+      {project.howItWorks && (
+        <div className="mt-16 lg:mt-28" data-reveal>
+          <h4 className="label">How it works</h4>
+          <ol className="mt-5 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+            {project.howItWorks.map((s, i) => (
+              <li key={s.title} className="relative bg-ink-2 p-6">
+                <span className="inline-flex size-9 items-center justify-center rounded-full border border-signal/40 font-mono text-xs text-signal">{String(i + 1).padStart(2, '0')}</span>
+                <p className="mt-4 text-lg font-semibold tracking-tight">{s.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-mute">{s.body}</p>
               </li>
             ))}
           </ol>
         </div>
-      </div>
+      )}
 
-      <div className="mt-12 space-y-8" data-reveal>
-        <Facts project={project} wide />
+      <div className="mt-10 space-y-8" data-reveal>
+        {project.facts.length > 0 && <Facts project={project} wide />}
         <ul className="flex flex-wrap gap-2" aria-label="Technologies">
           {project.stack.map((s) => <Tag key={s}>{s}</Tag>)}
         </ul>
@@ -199,7 +179,7 @@ function Split({ project, flip }: { project: Project; flip: boolean }) {
               {project.decisions.map((d) => (
                 <li key={d.title} className="border-l border-line-2 pl-4">
                   <p className="font-medium">{d.title}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-mute">{d.body}</p>
+                  <p className="mt-1 hidden text-sm leading-relaxed text-mute sm:block">{d.body}</p>
                 </li>
               ))}
             </ol>

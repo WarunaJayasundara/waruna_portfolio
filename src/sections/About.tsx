@@ -14,8 +14,8 @@ export function About() {
             records people depend on.
           </p>
           <p className="text-mute">
-            My final-year project, HelaIQ, taught me to treat claims as things to be tested, from psychometric models to
-            machine-learning metrics. Alongside it I built two client systems that are now live: a point-of-sale system
+            My final-year project, HelaIQ, is a complete learning platform with an adaptive test, brain games and an
+            exam-readiness prediction. Alongside it I built two client systems that are now live: a point-of-sale system
             for a mobile accessories shop and a deed-registration tracker for a notarial office.
           </p>
           <p className="text-mute">
