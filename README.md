@@ -83,6 +83,6 @@ Set `VITE_SITE_URL` to the live URL with no trailing slash (for example `https:/
 ## Quality checks (last run 20 Oct 2026, local production build)
 
 - Pages are pre-rendered: with JavaScript turned off, the home page shows about 16,000 characters of content and each case study shows its own title, description and text. React then hydrates the HTML with no hydration warnings.
--  passes with no TypeScript errors (about 83 kB of gzipped JS).
-- Lighthouse 12.2.1: desktop 100 in all four categories on the home page and ; mobile home page Performance 96, Accessibility 100, Best Practices 100, SEO 100.
-- Tested in real Chrome: wheel scrolling, nav links,  deep links, case studies, the playable game, copy buttons, the mobile menu, no horizontal overflow at 390 px. With reduced motion, smooth scrolling and animations are off and all content is visible.
+- `npm run build` passes with no TypeScript errors (about 83 kB of gzipped JS).
+- Lighthouse 12.2.1: desktop 100 in all four categories on the home page and `/work/helaiq`; mobile home page Performance 96, Accessibility 100, Best Practices 100, SEO 100.
+- Tested in real Chrome: wheel scrolling, nav links, `/#section` deep links, case studies, the playable game, copy buttons, the mobile menu, no horizontal overflow at 390 px. With reduced motion, smooth scrolling and animations are off and all content is visible.
