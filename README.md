@@ -23,7 +23,7 @@ Open http://localhost:5173.
 | Command | What it does |
 |---|---|
 | `npm run dev` | Dev server with hot reload |
-| `npm run build` | Type-check, build to `dist/`, and copy `index.html` to `404.html` |
+| `npm run build` | Type-check, build to `dist/`, then pre-render every page to static HTML (`scripts/prerender.mjs`) |
 | `npm run preview` | Serve the production build on http://localhost:4173 |
 | `npm run typecheck` | TypeScript only |
 | `npm run images` | Regenerate optimised WebP images from `assets-src/` |
@@ -69,7 +69,7 @@ Import the repository on netlify.com. `netlify.toml` already sets `npm run build
 2. Push to `main`. `.github/workflows/deploy-pages.yml` builds with `BASE_PATH=/<repo-name>/` and publishes the site.
 3. For a user site (`<username>.github.io`) or a custom domain, change `BASE_PATH` in the workflow to `/`.
 
-Deep links such as `/work/helaiq` work on Pages because the build also writes `404.html`.
+Every page is pre-rendered to its own HTML file (`dist/work/<slug>/index.html`), so deep links work on any static host and unknown pages get the pre-rendered `404.html` with a real 404 status.
 
 ### After the first deploy
 
@@ -80,9 +80,9 @@ Set `VITE_SITE_URL` to the live URL with no trailing slash (for example `https:/
 - **Vercel / Netlify:** open the project's **Domains** settings, add the domain, and create the DNS records they show you (usually an `A` record for the root domain and a `CNAME` for `www`). HTTPS is issued automatically.
 - **GitHub Pages:** add the domain under **Settings → Pages → Custom domain**, create a `CNAME` DNS record pointing to `<username>.github.io`, and set `BASE_PATH` to `/`.
 
-## Quality checks (last run 19 Oct 2026, local production build)
+## Quality checks (last run 20 Oct 2026, local production build)
 
-- `npm run build` passes with no TypeScript errors. JS is about 83 kB gzipped; case studies load as a separate 2 kB chunk.
-- Lighthouse 12.2.1, desktop, on the home page and `/work/helaiq`: 100 in Performance, Accessibility, Best Practices and SEO.
-- Lighthouse 12.2.1, mobile (simulated slow phone), home page: Accessibility 100, Best Practices 100, SEO 100. Performance was 81-88 across three runs; the animated particle canvases cost about 0.4 s of main-thread time on that simulated device.
-- Tested in real Chrome: wheel scrolling, nav links, `/#section` deep links, case-study navigation, no horizontal overflow at 390 px, no console errors. With reduced motion, smooth scrolling and animations are off and all content is visible.
+- Pages are pre-rendered: with JavaScript turned off, the home page shows about 16,000 characters of content and each case study shows its own title, description and text. React then hydrates the HTML with no hydration warnings.
+-  passes with no TypeScript errors (about 83 kB of gzipped JS).
+- Lighthouse 12.2.1: desktop 100 in all four categories on the home page and ; mobile home page Performance 96, Accessibility 100, Best Practices 100, SEO 100.
+- Tested in real Chrome: wheel scrolling, nav links,  deep links, case studies, the playable game, copy buttons, the mobile menu, no horizontal overflow at 390 px. With reduced motion, smooth scrolling and animations are off and all content is visible.

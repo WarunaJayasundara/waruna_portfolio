@@ -17,7 +17,6 @@ export const profile = {
     degree: 'Bachelor of Information and Communication Technology (Hons)',
     school: 'University of Kelaniya',
     specialisation: 'Software Systems',
-    year: 'Expected 2026',
   },
 } as const;
 

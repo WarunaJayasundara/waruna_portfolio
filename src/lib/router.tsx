@@ -23,8 +23,9 @@ function scrollToHash(hash: string | undefined, topIfMissing = true, immediate =
 type RouterValue = { path: string; navigate: (to: string) => void };
 const RouterContext = createContext<RouterValue>({ path: '/', navigate: () => {} });
 
-export function RouterProvider({ children }: { children: ReactNode }) {
-  const [path, setPath] = useState(() => toAppPath(window.location.pathname));
+/** `initialPath` is used when pre-rendering at build time, where there is no window. */
+export function RouterProvider({ children, initialPath }: { children: ReactNode; initialPath?: string }) {
+  const [path, setPath] = useState(() => initialPath ?? toAppPath(window.location.pathname));
 
   // Honour a hash in the initial URL once the page has rendered (e.g. /#contact).
   useEffect(() => {

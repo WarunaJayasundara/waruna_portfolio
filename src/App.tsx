@@ -1,4 +1,5 @@
-import { lazy, Suspense } from 'react';
+import { useEffect } from 'react';
+import { startMotion } from './lib/motion';
 import { useRouter, Link } from './lib/router';
 import { useReveal } from './lib/useReveal';
 import { getProject } from './data/projects';
@@ -14,13 +15,16 @@ import { Expertise } from './sections/Expertise';
 import { About } from './sections/About';
 import { Experience } from './sections/Experience';
 import { Contact } from './sections/Contact';
-
-// Case studies are split into their own chunk; the home page never waits on them.
-const CaseStudy = lazy(() => import('./pages/CaseStudy'));
+// Case studies are small (about 2 kB) and pre-rendered, so they ship in the main
+// bundle; this keeps hydration in a single pass on every page.
+import CaseStudy from './pages/CaseStudy';
 
 export default function App() {
   const { path } = useRouter();
   useReveal(path);
+  // Smooth scrolling and scroll-linked effects start only after React has
+  // attached to the pre-rendered HTML, so the first render matches exactly.
+  useEffect(() => startMotion(), []);
 
   const match = path.match(/^\/work\/([\w-]+)\/?$/);
   const project = match ? getProject(match[1]) : undefined;
@@ -43,9 +47,7 @@ export default function App() {
             <Contact />
           </>
         ) : project?.caseStudy ? (
-          <Suspense fallback={<div className="min-h-screen" />}>
-            <CaseStudy project={project} />
-          </Suspense>
+          <CaseStudy project={project} />
         ) : (
           <NotFound />
         )}

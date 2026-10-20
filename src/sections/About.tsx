@@ -41,10 +41,6 @@ export function About() {
                 <dd>{profile.education.specialisation}</dd>
               </div>
               <div className="flex justify-between gap-4">
-                <dt className="text-faint">Graduation</dt>
-                <dd>{profile.education.year}</dd>
-              </div>
-              <div className="flex justify-between gap-4">
                 <dt className="text-faint">Final-year project</dt>
                 <dd>HelaIQ</dd>
               </div>
